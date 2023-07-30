@@ -225,14 +225,14 @@ function updateCamera() {
         document.querySelector(".fa.fa-vk").classList.add("fade-in");
       if (t < -3040)
         document.querySelector(".fa.fa-instagram").classList.add("fade-in");
-    } else {
-      document.querySelector(".aboutThisSiteP").classList.remove("fade-in");
-      document.querySelector(".fa.fa-github").classList.remove("fade-in");
-      document.querySelector(".fa.fa-vk").classList.remove("fade-in");
-      document.querySelector(".fa.fa-instagram").classList.remove("fade-in");
+
+      return;
     }
+    document.querySelector(".aboutThisSiteP").classList.remove("fade-in");
+    document.querySelector(".fa.fa-github").classList.remove("fade-in");
+    document.querySelector(".fa.fa-vk").classList.remove("fade-in");
+    document.querySelector(".fa.fa-instagram").classList.remove("fade-in");
   }
-  console.log(t);
 }
 
 //Parallax effect on mousemove
@@ -244,7 +244,7 @@ document.addEventListener("mousemove", (e) => {
 });
 
 function addStar() {
-  const geometry = new THREE.SphereGeometry(0.1, 3, 3);
+  const geometry = new THREE.SphereGeometry(0.1, 3, 2);
   const material = new THREE.MeshLambertMaterial({
     color: 0xffffff,
     emissive: 0xffffff,
