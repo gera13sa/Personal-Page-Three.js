@@ -1,3 +1,5 @@
+const canvas = document.getElementById("bg");
+
 let lastT = 0;
 let scale = 2.3;
 let fovScale = 1;
@@ -43,10 +45,10 @@ var light = new THREE.PointLight(0xffffff);
 light.position.set(0, 0, -1);
 scene.add(light);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-document.body.appendChild(renderer.domElement);
+//document.body.appendChild(renderer.domElement);
 
 const sunGeometry = new THREE.SphereGeometry(2 * scale, 64, 5);
 const sunMaterial = new THREE.MeshLambertMaterial({
