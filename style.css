@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;900&display=swap");
+
+body {
+  background-color: black;
+  overflow-x: hidden;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.fa.fa-angle-double-down {
+  position: relative;
+  bottom: 0;
+  top: 85vh;
+  padding: 10px;
+  transition: opacity 0.8s;
+}
+
+.fa.fa-angle-double-down.fade-out {
+  opacity: 0;
+}
+
+.aboutThisSiteP {
+  width: 60%;
+  transition: opacity 0.8s;
+  opacity: 0;
+}
+.aboutThisSiteP.fade-in {
+  opacity: 1;
+}
+
+#fourthCard p {
+  font-size: large;
+}
+
+#fourthCard i {
+  color: white;
+}
+
+.fa.fa-github,
+.fa.fa-vk,
+.fa.fa-instagram {
+  padding: 15px;
+  transition: opacity 0.8s;
+  opacity: 0;
+}
+
+.fa.fa-github.fade-in,
+.fa.fa-vk.fade-in,
+.fa.fa-instagram.fade-in {
+  opacity: 1;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(0%);
+  }
+
+  50% {
+    transform: translateY(15%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+#arrow {
+  animation: updown 2s ease infinite;
+}
+
+main {
+  left: 0;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  position: absolute;
+  z-index: 99;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat (6 1fr);
+}
+
+.header {
+  text-align: center;
+  left: 0;
+  grid-column: 1 / 8;
+  height: 120vh;
+  text-align: center;
+}
+h1 {
+  font-weight: 900;
+}
+
+#firstCard,
+#secondCard,
+#thirdCard {
+  margin-top: -5vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20vh;
+  background-color: rgba(44 44 44 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  padding: 15px;
+  padding-left: 20px;
+  border-radius: 16px;
+  width: 45%;
+  border: 1px solid white;
+}
+#secondCard {
+  top: 40vh;
+  grid-column: 2 / 2;
+}
+
+#thirdCard {
+  top: 60vh;
+  grid-column: 2 / 2;
+}
+
+#fourthCard {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20vh;
+  width: 100%;
+}
+
+#aboutMe {
+  height: 120vh;
+  grid-column: 2 / 4;
+}
+
+#moreAboutMe {
+  height: 120vh;
+}
+
+#aboutThisSite {
+  grid-column: 2 / 3;
+  height: 200vh;
+}
+
+section {
+  height: 120vh;
+}
