@@ -12,25 +12,20 @@ let arrow = document.querySelector(".fa.fa-angle-double-down");
 let firstCardHeight = document.getElementById("firstCard").offsetHeight;
 let secondCardHeight = document.getElementById("secondCard").offsetHeight;
 
-//This hack is for showing first four card in full width on mobile display and allows to scroll further ...
-if (isMobile) {
-  fovScale = 1.2;
-  document.getElementById("fourthCard").style.marginLeft = "7%";
-  document.getElementById("fourthCard").style.width = "100%";
-  document.getElementById("secondCard").style.top +=
-    "calc(10% + " + firstCardHeight + "px)";
-  document.getElementById("thirdCard").style.top +=
-    "calc(15% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
-}
-
-// ... and hack is for keeping even spacing between card, because their width changes depending on screens width
 document.getElementById("secondCard").style.top +=
   "calc(20% + " + firstCardHeight + "px)";
 document.getElementById("thirdCard").style.top +=
   "calc(25% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
 
-const scene = new THREE.Scene();
+if (isMobile) {
+  fovScale = 1.2;
+  document.getElementById("secondCard").style.top +=
+    "calc(12% + " + firstCardHeight + "px)";
+  document.getElementById("thirdCard").style.top +=
+    "calc(18% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
+}
 
+const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75 * fovScale,
   window.innerWidth / window.innerHeight,
@@ -46,7 +41,6 @@ scene.add(light);
 const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-//document.body.appendChild(renderer.domElement);
 
 const sunGeometry = new THREE.SphereGeometry(2 * scale, 64, 5);
 const sunMaterial = new THREE.MeshLambertMaterial({
@@ -56,14 +50,8 @@ const sunMaterial = new THREE.MeshLambertMaterial({
 const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sun);
 
-//Generating 8 orbits around the sun
 for (let i = 1; i < 9; i++) {
-  const curvei = new THREE.EllipseCurve(
-    0,
-    0, // ax, aY
-    (2 + i) * scale,
-    (2 + i) * scale // xRadius, yRadius
-  );
+  const curvei = new THREE.EllipseCurve(0, 0, (2 + i) * scale, (2 + i) * scale);
   const pointsi = curvei.getPoints(64);
   const curveiGeometry = new THREE.BufferGeometry().setFromPoints(pointsi);
   const curveiMaterial = new THREE.LineBasicMaterial({ color: 0xffffff });
@@ -71,7 +59,6 @@ for (let i = 1; i < 9; i++) {
   scene.add(orbiti);
 }
 
-//Manual planet creation
 const mercuryPlanetGeometry = new THREE.SphereGeometry(0.2, 16, 16);
 const mercuryMaterial = new THREE.MeshStandardMaterial({ color: 0x775555 });
 const mercury = new THREE.Mesh(mercuryPlanetGeometry, mercuryMaterial);
@@ -105,12 +92,7 @@ scene.add(jupiter);
 const saturnPlanetGeometry = new THREE.SphereGeometry(0.6, 16, 16);
 const saturnMaterial = new THREE.MeshStandardMaterial({ color: 0xffcc88 });
 const saturn = new THREE.Mesh(saturnPlanetGeometry, saturnMaterial);
-const curveSaturn = new THREE.EllipseCurve(
-  0,
-  0, // ax, aY
-  0.4 * scale,
-  0.4 * scale // xRadius, yRadius
-);
+const curveSaturn = new THREE.EllipseCurve(0, 0, 0.4 * scale, 0.4 * scale);
 const pointsSaturn = curveSaturn.getPoints(64);
 const curveSaturnGeometry = new THREE.BufferGeometry().setFromPoints(
   pointsSaturn
@@ -235,7 +217,6 @@ function updateCamera() {
   }
 }
 
-//Parallax effect on mousemove
 document.addEventListener("mousemove", (e) => {
   if (!isMobile) {
     scene.position.x = -(e.clientX - window.innerWidth / 2) / 400;

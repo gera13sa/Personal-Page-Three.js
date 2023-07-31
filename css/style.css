@@ -138,40 +138,25 @@ section {
 }
 
 @media only screen and (max-height: 991px) {
-  #aboutMe {
-    margin-left: 2%;
+  #aboutMe,
+  #fourthCard {
+    margin-left: 3%;
     width: 85%;
   }
-
   #firstCard {
     width: 100%;
-    top: 5%;
+    top: 7%;
   }
-  #secondCard {
+  #secondCard,
+  #thirdCard,
+  #fourthCard {
     width: 100%;
   }
-  #thirdCard {
-    width: 100%;
-  }
-
   .fa.fa-angle-double-down {
-    top: 60%;
+    top: 58%;
   }
 }
 @media only screen and (max-height: 700px) {
-  #firstCard {
-    top: 5%;
-  }
-  #secondCard {
-    top: 5vh;
-  }
-  #thirdCard {
-    top: 5vh;
-  }
-
-  .fa.fa-angle-double-down {
-    top: 55%;
-  }
   main {
     font-size: 14px;
   }
