@@ -1,6 +1,6 @@
 const canvas = document.getElementById("bg");
 
-let lastT = 0;
+let lastDistFromTop = 0;
 let scale = 2.3;
 let fovScale = 1;
 const isMobile = /iPhone|iPod|Android/i.test(navigator.userAgent);
@@ -9,27 +9,25 @@ let mousePos = { x: undefined, y: undefined };
 
 let arrow = document.querySelector(".fa.fa-angle-double-down");
 
+let firstCardHeight = document.getElementById("firstCard").offsetHeight;
+let secondCardHeight = document.getElementById("secondCard").offsetHeight;
+
 //This hack is for showing first four card in full width on mobile display and allows to scroll further ...
 if (isMobile) {
   fovScale = 1.2;
-  document.getElementById("firstCard").style.width = "100%";
-  document.getElementById("secondCard").style.width = "100%";
-  document.getElementById("thirdCard").style.width = "100%";
-  document.getElementById("aboutMe").style.width = "86%";
-  document.getElementById("aboutMe").style.marginLeft = "2%";
-  document.getElementById("arrow").style.top = "80vh";
   document.getElementById("fourthCard").style.marginLeft = "7%";
   document.getElementById("fourthCard").style.width = "100%";
-  document.getElementById("aboutThisSite").style.height = "280vh";
+  document.getElementById("secondCard").style.top +=
+    "calc(10% + " + firstCardHeight + "px)";
+  document.getElementById("thirdCard").style.top +=
+    "calc(15% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
 }
 
 // ... and hack is for keeping even spacing between card, because their width changes depending on screens width
-let firstCardHeight = document.getElementById("firstCard").offsetHeight;
-let secondCardHeight = document.getElementById("secondCard").offsetHeight;
 document.getElementById("secondCard").style.top +=
-  "calc(25vh + " + firstCardHeight + "px)";
+  "calc(20% + " + firstCardHeight + "px)";
 document.getElementById("thirdCard").style.top +=
-  "calc(30vh + " + firstCardHeight + "px + " + secondCardHeight + "px)";
+  "calc(25% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
 
 const scene = new THREE.Scene();
 
@@ -195,35 +193,37 @@ function animate() {
 }
 
 function updateCamera() {
-  const t = document.body.getBoundingClientRect().top;
+  const distFromTop = document.body.getBoundingClientRect().top;
 
-  if (t > -1000) {
-    camera.rotation.x = t * -0.0006;
-    camera.position.y = t * 0.029;
-    camera.position.x = t * 0.015;
-    camera.position.z = 16 * scale + t * 0.005;
+  if (distFromTop > -1000) {
+    camera.rotation.x = distFromTop * -0.0006;
+    camera.position.y = distFromTop * 0.029;
+    camera.position.x = distFromTop * 0.015;
+    camera.position.z = 16 * scale + distFromTop * 0.005;
 
-    if (t >= 0) arrow.classList.remove("fade-out");
+    if (distFromTop >= 0) arrow.classList.remove("fade-out");
     else arrow.classList.add("fade-out");
 
-    lastT = t;
+    lastDistFromTop = distFromTop;
     return;
   }
 
-  if (t < -2550) {
+  if (distFromTop < -2550) {
     document.querySelector(".aboutThisSiteP").classList.add("fade-in");
 
-    if (t < -2700) {
-      if (lastT * 0.029 - (t + 2700) * 0.029 <= 0.1)
-        camera.rotation.x = lastT * -0.0006 - (t + 2700) * -0.0006;
+    if (distFromTop < -2700) {
+      if (lastDistFromTop * 0.029 - (distFromTop + 2700) * 0.029 <= 0.5)
+        camera.rotation.x =
+          lastDistFromTop * -0.0006 - (distFromTop + 2700) * -0.0006;
 
-      if (lastT * 0.029 - (t + 2700) * 0.029 <= 10)
-        camera.position.y = lastT * 0.029 - (t + 2700) * 0.029;
+      if (lastDistFromTop * 0.029 - (distFromTop + 2700) * 0.029 <= 0.5)
+        camera.position.y =
+          lastDistFromTop * 0.029 - (distFromTop + 2700) * 0.027;
 
       document.querySelector(".fa.fa-github").classList.add("fade-in");
-      if (t < -2900)
+      if (distFromTop < -2900)
         document.querySelector(".fa.fa-vk").classList.add("fade-in");
-      if (t < -3040)
+      if (distFromTop < -3040)
         document.querySelector(".fa.fa-instagram").classList.add("fade-in");
 
       return;
