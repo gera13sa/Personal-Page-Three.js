@@ -12,17 +12,17 @@ let arrow = document.querySelector(".fa.fa-angle-double-down");
 let firstCardHeight = document.getElementById("firstCard").offsetHeight;
 let secondCardHeight = document.getElementById("secondCard").offsetHeight;
 
-document.getElementById("secondCard").style.top +=
-  "calc(20% + " + firstCardHeight + "px)";
-document.getElementById("thirdCard").style.top +=
-  "calc(25% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
-
 if (isMobile) {
   fovScale = 1.2;
   document.getElementById("secondCard").style.top +=
-    "calc(12% + " + firstCardHeight + "px)";
+    "calc(15vh + " + firstCardHeight + "px)";
   document.getElementById("thirdCard").style.top +=
-    "calc(18% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
+    "calc(20vh + " + firstCardHeight + "px + " + secondCardHeight + "px)";
+} else {
+  document.getElementById("secondCard").style.top +=
+    "calc(20% + " + firstCardHeight + "px)";
+  document.getElementById("thirdCard").style.top +=
+    "calc(25% + " + firstCardHeight + "px + " + secondCardHeight + "px)";
 }
 
 const scene = new THREE.Scene();

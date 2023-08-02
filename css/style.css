@@ -137,7 +137,7 @@ section {
   height: 120vh;
 }
 
-@media only screen and (max-height: 991px) {
+@media only screen and (max-height: 1000px) {
   #aboutMe,
   #fourthCard {
     margin-left: 3%;
@@ -145,7 +145,7 @@ section {
   }
   #firstCard {
     width: 100%;
-    top: 7%;
+    top: 10vh;
   }
   #secondCard,
   #thirdCard,
@@ -153,7 +153,10 @@ section {
     width: 100%;
   }
   .fa.fa-angle-double-down {
-    top: 58%;
+    top: 70vh;
+  }
+  #aboutThisSite {
+    min-width: 100%;
   }
 }
 @media only screen and (max-height: 700px) {
